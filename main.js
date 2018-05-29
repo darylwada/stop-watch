@@ -14,6 +14,7 @@ function updateTime() {
   var timeLimit = parseInt($timeLimit.value)
   if (elapsedTime === timeLimit) {
     stopTimer()
+    $elapsedTime.classList.add('expired')
   }
   else {
     $elapsedTime.textContent = elapsedTime + 1

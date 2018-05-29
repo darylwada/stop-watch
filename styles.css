@@ -60,3 +60,7 @@ button:hover {
   font-size: 20px;
   text-align: center;
 }
+
+.expired {
+  color: rgb(203, 121, 121);
+}

@@ -39,6 +39,7 @@ function startTimer() {
 function resetTimer() {
   stopTimer()
   $elapsedTime.textContent = 0
+  $elapsedTime.classList.remove('expired')
   $startBtn.textContent = 'Start'
   $startBtn.classList.remove('started')
   $resetBtn.classList.add('hidden')

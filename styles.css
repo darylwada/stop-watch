@@ -31,3 +31,36 @@ button:hover {
 .hidden {
   visibility: hidden;
 }
+
+.time-limit-container {
+  display: block;
+  position: relative;
+  margin: 100px auto;
+  width: 150px;
+  height: 25px;
+  line-height: 25px;
+}
+
+.time-limit-label {
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  left: 0;
+  font-size: 20px;
+}
+
+#time-limit-input {
+  margin-left: 10px;
+  border: none;
+  padding: 0;
+  height: 25px;
+  width: 40px;
+  position: absolute;
+  right: 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+.expired {
+  color: rgb(203, 121, 121);
+}

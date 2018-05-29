@@ -1,6 +1,7 @@
 var $startBtn = document.querySelector('.start-btn')
 var $resetBtn = document.querySelector('.reset-btn')
 var $elapsedTime = document.querySelector('.elapsed-time')
+var $timeLimit = document.querySelector('#time-limit-input')
 var timerRunning = false
 var timerInterval
 
@@ -9,7 +10,15 @@ function stopTimer() {
 }
 
 function updateTime() {
-  $elapsedTime.textContent = parseInt($elapsedTime.textContent) + 1
+  var elapsedTime = parseInt($elapsedTime.textContent)
+  var timeLimit = parseInt($timeLimit.value)
+  if (elapsedTime === timeLimit) {
+    stopTimer()
+    $elapsedTime.classList.add('expired')
+  }
+  else {
+    $elapsedTime.textContent = elapsedTime + 1
+  }
 }
 
 function startTimer() {
@@ -30,6 +39,7 @@ function startTimer() {
 function resetTimer() {
   stopTimer()
   $elapsedTime.textContent = 0
+  $elapsedTime.classList.remove('expired')
   $startBtn.textContent = 'Start'
   $startBtn.classList.remove('started')
   $resetBtn.classList.add('hidden')

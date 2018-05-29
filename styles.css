@@ -7,21 +7,27 @@ body {
 
 .elapsed-time {
   font-size: 72px;
+  margin-bottom: 50px;
 }
 
-.start-btn {
-  margin-top: 50px;
+.btn {
+  display: block;
+  margin: 20px auto;
   height: 50px;
   width: 150px;
   font-size: 25px;
   line-height: 50px;
 }
 
-.start-btn:hover {
+.btn:hover {
   cursor: pointer;
 }
 
 .started {
   background-color: rgb(203, 121, 121);
   outline: 0;
+}
+
+.hidden {
+  visibility: hidden;
 }

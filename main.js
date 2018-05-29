@@ -6,7 +6,7 @@ function updateTime() {
 }
 
 function startTimer() {
-
+  setInterval(updateTime, 1000)
 }
 
 $startBtn.addEventListener('click', startTimer)

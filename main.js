@@ -32,6 +32,7 @@ function resetTimer() {
   $elapsedTime.textContent = 0
   $startBtn.textContent = 'Start'
   $startBtn.classList.remove('started')
+  $resetBtn.classList.add('hidden')
   timerRunning = false
 }
 

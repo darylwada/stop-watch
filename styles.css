@@ -21,7 +21,7 @@ body {
   cursor: pointer;
 }
 
-.paused {
+.started {
   background-color: rgb(203, 121, 121);
   outline: 0;
 }

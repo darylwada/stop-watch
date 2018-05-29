@@ -27,4 +27,9 @@ function startTimer() {
   timerRunning = !timerRunning
 }
 
+function resetTimer() {
+  stopTimer()
+}
+
 $startBtn.addEventListener('click', startTimer)
+$resetBtn.addEventListener('click', resetTimer)

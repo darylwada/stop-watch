@@ -15,10 +15,12 @@ function startTimer() {
   if (timerRunning) {
     stopTimer()
     $startBtn.textContent = 'Start'
+    $startBtn.classList.remove('paused')
   }
   else {
     timerInterval = setInterval(updateTime, 1000)
     $startBtn.textContent = 'Pause'
+    $startBtn.classList.add('paused')
   }
   timerRunning = !timerRunning
 }

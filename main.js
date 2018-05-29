@@ -29,6 +29,7 @@ function startTimer() {
 
 function resetTimer() {
   stopTimer()
+  $elapsedTime.textContent = 0
 }
 
 $startBtn.addEventListener('click', startTimer)

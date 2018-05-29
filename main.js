@@ -12,13 +12,15 @@ function updateTime() {
 }
 
 function startTimer() {
-  timerRunning = !timerRunning
   if (timerRunning) {
     stopTimer()
+    $startBtn.textContent = 'Start'
   }
   else {
-    timerInterval = setInterval(updateTime, 1000)    
+    timerInterval = setInterval(updateTime, 1000)
+    $startBtn.textContent = 'Pause'
   }
+  timerRunning = !timerRunning
 }
 
 $startBtn.addEventListener('click', startTimer)

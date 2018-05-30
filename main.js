@@ -1,4 +1,5 @@
 
+
 function renderTimeLimit(stopWatchState) {
   var $timeLimitContainer = document.createElement('div')
   var $timeLimitLabel = document.createElement('p')
@@ -37,12 +38,23 @@ function renderTime(stopWatchState) {
 function renderStartBtn(stopWatchState) {
   var $startBtn = document.createElement('button')
   $startBtn.classList.add('start-btn')
+  // Change the text depending on whether the timer has started or not
   if (stopWatchState.isStarted) {
     $startBtn.textContent = 'Pause'
   }
   else {
     $startBtn.textContent = 'Start'
   }
+  // Change the background color depending on whether the timer is paused or not
+  if (stopWatchState.isPaused) {
+    $startBtn.classList.remove('started')
+  }
+  else if (!stopWatchState.isPaused) {
+    $startBtn.classList.add('started')
+  }
+  // if (stopWatchState.isStarted) {
+  //   $startBtn.addEventListener('click', startTimer)
+  // }
   return $startBtn
 }
 
@@ -60,25 +72,46 @@ function renderStopWatch(stopWatchState) {
   return $container
 }
 
-function startInterval() {
-  timerInterval = setInterval(function() {
-    stopWatchState.isStarted = true
-    stopWatchState.timeElapsed += 1
-    document.body.prepend(renderStopWatch(stopWatchState))
-  }, 1000)
+function refresh() {
+  stopWatchState.timeElapsed += 1
+  console.log(stopWatchState);
+  document.body.prepend(renderStopWatch(stopWatchState))
 }
 
+function stopTimer() {
+  clearInterval(timerInterval)
+}
+
+function startTimer() {
+  if (!stopWatchState.isPaused) {
+    stopTimer()
+  }
+  else if (!stopWatchState.isStarted || stopWatchState.isPaused) {
+    timerInterval = setInterval(refresh, 1000)
+  }
+  stopWatchState.isStarted = true
+  stopWatchState.isPaused = !stopWatchState.isPaused
+}
+
+// Initial conditions
 var stopWatchState = {
   isStarted: false,
+  isPaused: true,
   timeElapsed: 0,
   timeLimit: 5
 }
 var timerInterval
 
+// Add initial content to the page
 document.body.prepend(renderStopWatch(stopWatchState))
 
-var $startBtn = document.querySelector('.start-btn')
-$startBtn.addEventListener('click', startInterval)
+var $body = document.querySelector('body')
+$body.addEventListener('click', function(e) {
+  var $startBtn = document.querySelector('.start-btn')
+  if (e.target === $startBtn) {
+    startTimer()
+  }
+})
 
 
 

@@ -4,6 +4,14 @@ var stopWatchState = {
   timeLimit: 5
 }
 
+function renderStopWatch(stopWatchState) {
+  var $container = document.createElement('div')
+  var $header = document.createElement('h1').textContent = 'Stop Watch'
+
+  $container.appendChild($header)
+  return $container
+}
+
 var $startBtn = document.querySelector('.start-btn')
 var $resetBtn = document.querySelector('.reset-btn')
 var $elapsedTime = document.querySelector('.elapsed-time')

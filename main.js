@@ -10,7 +10,9 @@ function renderTimeLimit(stopWatchState) {
   var $timeLimitInput = document.createElement('input')
   $timeLimitContainer.classList.add('time-limit-container')
   $timeLimitLabel.classList.add('time-limit-label')
-  $timeLimitInput.classList.add('time-limit-input')
+  $timeLimitInput.id = 'time-limit-input'
+
+  $timeLimitLabel.textContent = 'Time Limit'
 
   $timeLimitContainer.appendChild($timeLimitLabel)
   $timeLimitContainer.appendChild($timeLimitInput)
@@ -29,6 +31,7 @@ function renderResetBtn(stopWatchState) {
 
 function renderTime(stopWatchState) {
   var $elapsedTime = document.createElement('div')
+  $elapsedTime.classList.add('elapsed-time')
   $elapsedTime.textContent = stopWatchState.timeElapsed
   if (stopWatchState.timeElapsed === stopWatchState.timeLimit) {
     $elapsedTime.classList.add('expired')
@@ -50,16 +53,19 @@ function renderStartBtn(stopWatchState) {
 
 function renderStopWatch(stopWatchState) {
   var $container = document.createElement('div')
-  var $header = document.createElement('h1').textContent = 'Stop Watch'
-
+  var $header = document.createElement('h1')
+  $header.textContent = 'Stop Watch'
   $container.appendChild($header)
   $container.appendChild(renderTime(stopWatchState))
-  $container.appendChild(renderStartBtn(stopWatchState)))
-  $container.appendChild(renderResetBtn(stopWatchState)))
-  $container.appendChild(renderTimeLimit(stopWatchState)))
+  $container.appendChild(renderStartBtn(stopWatchState))
+  $container.appendChild(renderResetBtn(stopWatchState))
+  $container.appendChild(renderTimeLimit(stopWatchState))
 
   return $container
 }
+
+document.body.appendChild(renderStopWatch(stopWatchState))
+
 
 var $startBtn = document.querySelector('.start-btn')
 var $resetBtn = document.querySelector('.reset-btn')

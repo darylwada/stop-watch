@@ -22,6 +22,7 @@ function renderResetBtn(stopWatchState) {
   if (!stopWatchState.isStarted) {
     $resetBtn.classList.add('hidden')
   }
+  $resetBtn.textContent = 'Reset'
   return $resetBtn
 }
 
@@ -78,8 +79,18 @@ function refresh() {
   document.body.prepend(renderStopWatch(stopWatchState))
 }
 
+function resetTimer() {
+  stopTimer()
+  stopWatchState.isStarted = false
+  stopWatchState.isPaused = true
+  stopWatchState.timeElapsed = 0
+  stopWatchState.timeLimit = null
+  stopWatchState.timerInterval = null
+  document.body.prepend(renderStopWatch(stopWatchState))
+}
+
 function stopTimer() {
-  clearInterval(timerInterval)
+  clearInterval(stopWatchState.timerInterval)
 }
 
 function startTimer() {
@@ -87,7 +98,7 @@ function startTimer() {
     stopTimer()
   }
   else if (!stopWatchState.isStarted || stopWatchState.isPaused) {
-    timerInterval = setInterval(refresh, 1000)
+    stopWatchState.timerInterval = setInterval(refresh, 1000)
   }
   stopWatchState.isStarted = true
   stopWatchState.isPaused = !stopWatchState.isPaused
@@ -98,9 +109,10 @@ var stopWatchState = {
   isStarted: false,
   isPaused: true,
   timeElapsed: 0,
-  timeLimit: 5
+  timeLimit: 5,
+  timerInterval: null
 }
-var timerInterval
+// var timerInterval
 
 // Add initial content to the page
 document.body.prepend(renderStopWatch(stopWatchState))
@@ -108,8 +120,11 @@ document.body.prepend(renderStopWatch(stopWatchState))
 var $body = document.querySelector('body')
 $body.addEventListener('click', function(e) {
   var $startBtn = document.querySelector('.start-btn')
+  var $resetBtn = document.querySelector('.reset-btn')
   if (e.target === $startBtn) {
     startTimer()
+  } else if (e.target === $resetBtn) {
+    resetTimer()
   }
 })
 

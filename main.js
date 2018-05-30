@@ -1,7 +1,7 @@
 var stopWatchState = {
   isStarted: false,
   timeElapsed: 0,
-  timeLimit: 10
+  timeLimit: 5
 }
 
 var $startBtn = document.querySelector('.start-btn')

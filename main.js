@@ -4,6 +4,14 @@ var stopWatchState = {
   timeLimit: 5
 }
 
+function renderResetBtn(stopWatchState) {
+  var $resetBtn = document.createElement('button')
+  if (!stopWatchState.isStarted) {
+    $resetBtn.classList.add('hidden')
+  }
+  return $resetBtn
+}
+
 function renderTime(stopWatchState) {
   var $elapsedTime = document.createElement('div')
   $elapsedTime.textContent = stopWatchState.timeElapsed

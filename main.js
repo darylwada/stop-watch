@@ -67,7 +67,7 @@ function renderStopWatch(stopWatchState) {
 }
 
 function refresh(element) {
-  if (!stopWatchState.isPaused && element !== 'button') {
+  if (!stopWatchState.isPaused) {
     stopWatchState.timeElapsed += 1
   }
   if (stopWatchState.timeElapsed === stopWatchState.timeLimit) {

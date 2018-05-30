@@ -4,6 +4,17 @@ var stopWatchState = {
   timeLimit: 5
 }
 
+function renderStartBtn(stopWatchState) {
+  var $startBtn = document.createElement('button')
+  if (stopWatchState.isStarted) {
+    $startBtn.textContent = 'Pause'
+  }
+  else {
+    $startBtn.textContent = 'Start'
+  }
+  return $startBtn
+}
+
 function renderStopWatch(stopWatchState) {
   var $container = document.createElement('div')
   var $header = document.createElement('h1').textContent = 'Stop Watch'

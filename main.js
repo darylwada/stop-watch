@@ -1,3 +1,9 @@
+var stopWatchState = {
+  isStarted: false,
+  timeElapsed: 0,
+  timeLimit: 10
+}
+
 var $startBtn = document.querySelector('.start-btn')
 var $resetBtn = document.querySelector('.reset-btn')
 var $elapsedTime = document.querySelector('.elapsed-time')

@@ -20,6 +20,7 @@ function renderTimeLimit(stopWatchState) {
 
 function renderResetBtn(stopWatchState) {
   var $resetBtn = document.createElement('button')
+  $resetBtn.classList.add('reset-btn')
   if (!stopWatchState.isStarted) {
     $resetBtn.classList.add('hidden')
   }
@@ -37,6 +38,7 @@ function renderTime(stopWatchState) {
 
 function renderStartBtn(stopWatchState) {
   var $startBtn = document.createElement('button')
+  $startBtn.classList.add('start-btn')
   if (stopWatchState.isStarted) {
     $startBtn.textContent = 'Pause'
   }
@@ -51,6 +53,11 @@ function renderStopWatch(stopWatchState) {
   var $header = document.createElement('h1').textContent = 'Stop Watch'
 
   $container.appendChild($header)
+  $container.appendChild(renderTime(stopWatchState))
+  $container.appendChild(renderStartBtn(stopWatchState)))
+  $container.appendChild(renderResetBtn(stopWatchState)))
+  $container.appendChild(renderTimeLimit(stopWatchState)))
+
   return $container
 }
 

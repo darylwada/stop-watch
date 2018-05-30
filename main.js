@@ -4,6 +4,15 @@ var stopWatchState = {
   timeLimit: 5
 }
 
+function renderTime(stopWatchState) {
+  var $elapsedTime = document.createElement('div')
+  $elapsedTime.textContent = stopWatchState.timeElapsed
+  if (stopWatchState.timeElapsed === stopWatchState.timeLimit) {
+    $elapsedTime.classList.add('expired')
+  }
+  return $elapsedTime
+}
+
 function renderStartBtn(stopWatchState) {
   var $startBtn = document.createElement('button')
   if (stopWatchState.isStarted) {

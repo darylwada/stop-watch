@@ -4,6 +4,20 @@ var stopWatchState = {
   timeLimit: 5
 }
 
+function renderTimeLimit(stopWatchState) {
+  var $timeLimitContainer = document.createElement('div')
+  var $timeLimitLabel = document.createElement('p')
+  var $timeLimitInput = document.createElement('input')
+  $timeLimitContainer.classList.add('time-limit-container')
+  $timeLimitLabel.classList.add('time-limit-label')
+  $timeLimitInput.classList.add('time-limit-input')
+
+  $timeLimitContainer.appendChild($timeLimitLabel)
+  $timeLimitContainer.appendChild($timeLimitInput)
+
+  return $timeLimitContainer
+}
+
 function renderResetBtn(stopWatchState) {
   var $resetBtn = document.createElement('button')
   if (!stopWatchState.isStarted) {

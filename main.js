@@ -1,5 +1,3 @@
-
-
 function renderTimeLimit(stopWatchState) {
   var $timeLimitContainer = document.createElement('div')
   var $timeLimitLabel = document.createElement('p')
@@ -7,9 +5,7 @@ function renderTimeLimit(stopWatchState) {
   $timeLimitContainer.classList.add('time-limit-container')
   $timeLimitLabel.classList.add('time-limit-label')
   $timeLimitInput.id = 'time-limit-input'
-
   $timeLimitLabel.textContent = 'Time Limit'
-
   $timeLimitContainer.appendChild($timeLimitLabel)
   $timeLimitContainer.appendChild($timeLimitInput)
 
@@ -43,7 +39,7 @@ function renderStartBtn(stopWatchState) {
   if (stopWatchState.isStarted) {
     $startBtn.textContent = 'Pause'
   }
-  else {
+  if (stopWatchState.isPaused) {
     $startBtn.textContent = 'Start'
   }
   // Change the background color depending on whether the timer is paused or not
@@ -53,9 +49,6 @@ function renderStartBtn(stopWatchState) {
   else if (!stopWatchState.isPaused) {
     $startBtn.classList.add('started')
   }
-  // if (stopWatchState.isStarted) {
-  //   $startBtn.addEventListener('click', startTimer)
-  // }
   return $startBtn
 }
 
@@ -73,9 +66,13 @@ function renderStopWatch(stopWatchState) {
   return $container
 }
 
-function refresh() {
-  stopWatchState.timeElapsed += 1
-  console.log(stopWatchState);
+function refresh(element) {
+  if (!stopWatchState.isPaused && element !== 'button') {
+    stopWatchState.timeElapsed += 1
+  }
+  if (stopWatchState.timeElapsed === stopWatchState.timeLimit) {
+    stopTimer()
+  }
   document.body.prepend(renderStopWatch(stopWatchState))
 }
 
@@ -95,13 +92,15 @@ function stopTimer() {
 
 function startTimer() {
   if (!stopWatchState.isPaused) {
+    stopWatchState.isPaused = true
     stopTimer()
+    refresh()
   }
   else if (!stopWatchState.isStarted || stopWatchState.isPaused) {
+    stopWatchState.isPaused = false
     stopWatchState.timerInterval = setInterval(refresh, 1000)
   }
   stopWatchState.isStarted = true
-  stopWatchState.isPaused = !stopWatchState.isPaused
 }
 
 // Initial conditions
@@ -109,10 +108,9 @@ var stopWatchState = {
   isStarted: false,
   isPaused: true,
   timeElapsed: 0,
-  timeLimit: 5,
+  timeLimit: null,
   timerInterval: null
 }
-// var timerInterval
 
 // Add initial content to the page
 document.body.prepend(renderStopWatch(stopWatchState))
@@ -121,66 +119,12 @@ var $body = document.querySelector('body')
 $body.addEventListener('click', function(e) {
   var $startBtn = document.querySelector('.start-btn')
   var $resetBtn = document.querySelector('.reset-btn')
+  var $timeLimit = document.querySelector('#time-limit-input')
+  stopWatchState.timeLimit = parseInt($timeLimit.value)
   if (e.target === $startBtn) {
     startTimer()
-  } else if (e.target === $resetBtn) {
+  }
+  else if (e.target === $resetBtn) {
     resetTimer()
   }
 })
-
-
-
-
-
-
-
-// var $startBtn = document.querySelector('.start-btn')
-// var $resetBtn = document.querySelector('.reset-btn')
-// var $elapsedTime = document.querySelector('.elapsed-time')
-// var $timeLimit = document.querySelector('#time-limit-input')
-// var timerRunning = false
-// var timerInterval
-//
-// function stopTimer() {
-//   clearInterval(timerInterval)
-// }
-//
-// function updateTime() {
-//   var elapsedTime = parseInt($elapsedTime.textContent)
-//   var timeLimit = parseInt($timeLimit.value)
-//   if (elapsedTime === timeLimit) {
-//     stopTimer()
-//     $elapsedTime.classList.add('expired')
-//   }
-//   else {
-//     $elapsedTime.textContent = elapsedTime + 1
-//   }
-// }
-//
-// function startTimer() {
-//   if (timerRunning) {
-//     stopTimer()
-//     $startBtn.textContent = 'Start'
-//     $startBtn.classList.remove('started')
-//   }
-//   else {
-//     timerInterval = setInterval(updateTime, 1000)
-//     $startBtn.textContent = 'Pause'
-//     $startBtn.classList.add('started')
-//     $resetBtn.classList.remove('hidden')
-//   }
-//   timerRunning = !timerRunning
-// }
-//
-// function resetTimer() {
-//   stopTimer()
-//   $elapsedTime.textContent = 0
-//   $elapsedTime.classList.remove('expired')
-//   $startBtn.textContent = 'Start'
-//   $startBtn.classList.remove('started')
-//   $resetBtn.classList.add('hidden')
-//   timerRunning = false
-// }
-//
-// $startBtn.addEventListener('click', startTimer)
-// $resetBtn.addEventListener('click', resetTimer)
